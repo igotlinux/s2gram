@@ -1,83 +1,48 @@
-[![GitHub release](https://img.shields.io/badge/release-v1.3.4-brightgreen?style=flat-square)](https://github.com/ShingareOm/s2gram/releases)
-[![GitHub stars](https://img.shields.io/github/stars/ShingareOm/s2gram?style=flat-square)](https://github.com/ShingareOm/s2gram/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/ShingareOm/s2gram?style=flat-square)](https://github.com/ShingareOm/s2gram/network)
-[![GitHub issues](https://img.shields.io/github/issues/ShingareOm/s2gram?style=flat-square)](https://github.com/ShingareOm/s2gram/issues)
-[![GitHub license](https://img.shields.io/github/license/ShingareOm/s2gram?style=flat-square)](https://github.com/ShingareOm/s2gram/blob/main/LICENSE)
-
-
 # s2gram
-**s2gram.sh is a Bash script that facilitates sending text messages or files to a Telegram chat using a Telegram bot.**
 
-![s2gram-banner](banner.png)
+simple bash tool to ship terminal outputs file dumps and clipboard text straight into a telegram bot chat
 
-## ***Requirements*** <a name="requirements"></a>
+handy when you are running a long server task or scan and want the notification on your phone instead of babysitting the terminal
 
-- curl needs to be installed, If not installed already.
-- Telegram chat ID [CHATID](CHATID.md)
-- Telegram bot API token [AUTHTOKEN](AUTHTOKEN.md)
+## requirements
 
-## ***Download s2gram***
+curl
+telegram bot token from botfather
+your telegram chat id
 
-You can download the latest version of s2gram by cloning the GitHub repository.
+## install
+
 ```bash
-git clone https://github.com/ShingareOm/s2gram.git
+git clone https://github.com/igotlinux/s2gram.git
+cd s2gram
+chmod +x s2gram.sh
+sudo cp s2gram.sh /usr/local/bin/s2gram
 ```
 
-## ***Installation***
+set your bot token and chat id inside s2gram sh or export them in your env
 
- - cd to **s2gram** directory. ```cd s2gram```
- - add your `TOKEN="YOUR-BOT-TOKEN"` & `CHAT_ID="YOUR-CHAT-ID-OF-TELEGRAM"` in s2gram.sh shell script, See [Requirements](#requirements) 
- - make executable: `sudo chmod +x ./s2gram.sh`
- - add in /bin: `sudo cp s2gram.sh /bin/s2gram` OR `sudo cp s2gram /usr/bin/s2gram` 
- - you will be able to access and run the s2gram with simple `s2gram --help` command.
+## usage
 
-## ***Features***
-- Send Messages
-    Send text messages directly to Telegram.
-    Send files as documents to Telegram.
+pipe terminal output directly
+```bash
+tail -n 50 /var/log/nginx/access.log | s2gram
+```
 
-- Clipboard Integration
-    Fetch and send the current contents of the clipboard.
+send a quick message
+```bash
+s2gram -t "backup finished successfully"
+```
 
-- Path Information
-    Retrieve and send the current working directory path.
+send a file
+```bash
+s2gram -f database_dump.sql.gz
+```
 
-- Piping
-    You can use this tool using piping as well, to send some data using stdin pipe
+send whatever is currently in your clipboard
+```bash
+s2gram -c
+```
 
-- Help and Usage
-    Provides a comprehensive help message outlining available options and examples.
+## license
 
-
-
-## **Advanced Usage**
-
-<pre><code>
-Author: Om Shingare (<a href="https://in.linkedin.com/in/shingareom">Om Shingare</a>)
-
-Usage: ./s2gram.sh [OPTIONS]
-Send text or files to Telegram chat using a Telegram bot.
-
-Options:
-  -t, --text "message"    Send a text message
-  -f, --file file.ext     Send a file
-  -c, --clipboard         Send current clipboard contents
-      --path              Send current working directory path
-  -h, --help              Show this help message
-
-Examples:
-  cat 'file.txt' | s2gram.sh
-  s2gram.sh -t \"this is my text\"
-  s2gram.sh -f file.ext
-  s2gram.sh -c
-  s2gram.sh --path
-
-
-</code></pre>
-
-
-## **Legal disclaimer**
-
-    Usage of s2gram for attacking targets without prior mutual consent is illegal.
-    It is the end user's responsibility to obey all applicable local,state and federal laws. 
-    Developer assume no liability and is not responsible for any misuse or damage caused by this program.
+mit
